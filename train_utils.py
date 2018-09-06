@@ -12,13 +12,13 @@ from datetime import datetime
 
 def get_cmd_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('data_dir', type=str, default='flowers', help='Directory of a dataset. Must include /dir/train/ ,             /dir/valid/ and /dir/test/.')
+    parser.add_argument('data_dir', type=str, default='flowers', help='Directory of a dataset. Must include /dir/train/, /dir/valid/ and /dir/test/.')
     parser.add_argument('--save_dir', type=str, default='saved_checkpoints/checkpoint.pth', help='Save directory.')
-    parser.add_argument('--arch', type=str, default='vgg16', help='Choose between VGG16 and ?.')
-    parser.add_argument('--hidden_units', type=str, default='512,124', help='Layer sizes. Seperate with comma (,).')
-    parser.add_argument('--epochs', type=int, default=1)
+    parser.add_argument('--arch', type=str, default='vgg16', help='Choose between "vgg16" and "alexnet" and "densenet".')
+    parser.add_argument('--hidden_units', type=str, default='512,124', help='Hidden layer sizes. Seperate with comma (,).')
+    parser.add_argument('--epochs', type=int, default=1, help='Number of epochs.')
     parser.add_argument('--learning_rate', type=float, default=0.005)
-    parser.add_argument('--gpu',action='store_true')
+    parser.add_argument('--gpu',action='store_true', help='Append if CUDA is available.')
     return parser.parse_args()
 
 def transform_data(data_dir):
@@ -100,8 +100,8 @@ def create_classifier(input_size, hidden_size, output_size, dropout = 0.5):
 
     return nn.Sequential(OrderedDict(sequence))
 
-def train_model(model, train_dataloader, test_dataloader, optimizer, criterion, epochs = 3, print_sequence = 50, gpu = False):
-    """TODO DocStr: Train model"""
+def train_model(model, train_dataloader, test_dataloader, optimizer, criterion, epochs = 3, print_sequence = 500, gpu = False):
+    """Train model."""
     print("Training begins..")
 
     steps = 0

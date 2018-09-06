@@ -1,4 +1,5 @@
 import train_utils
+import os
 
 def main():
     in_arg = train_utils.get_cmd_args()
@@ -38,6 +39,9 @@ def main():
     train_utils.train_model(model, dataloaders["train"], dataloaders["valid"],
                                 optimizer, criterion, epochs = in_arg.epochs,
                                 gpu = in_arg.gpu)
+
+    if not os.path.exists(in_arg.save_dir.split('/')[0] + "/"):
+        os.makedirs(in_arg.save_dir.split('/')[0] + "/")
 
     train_utils.save_model(arch["name"], model,
                                 optimizer, criterion, path=in_arg.save_dir)

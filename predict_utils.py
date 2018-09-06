@@ -11,11 +11,11 @@ from collections import OrderedDict
 def get_cmd_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('input', type=str)
-    parser.add_argument('checkpoint', type=str)
-    parser.add_argument('--category_names', type=str, default=None)
-    parser.add_argument('--topk', type=int, default=5)
-    parser.add_argument('--gpu',action='store_true')
+    parser.add_argument('input', type=str, help='Input image.')
+    parser.add_argument('checkpoint', type=str, help='Saved checkpoint.')
+    parser.add_argument('--category_names', type=str, default=None, help='Include the mapping of classes to the output of the network.')
+    parser.add_argument('--topk', type=int, default=5, help='Number of returned probabilities.')
+    parser.add_argument('--gpu',action='store_true', help='Append if CUDA is available')
 
     return parser.parse_args()
 
