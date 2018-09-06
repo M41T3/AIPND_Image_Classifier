@@ -13,11 +13,11 @@ from datetime import datetime
 def get_cmd_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('data_dir', type=str, default='flowers', help='Directory of a dataset. Must include /dir/train/ ,             /dir/valid/ and /dir/test/.')
-    parser.add_argument('--save_dir', type=str, default='saved_checkpoints/', help='Save directory.')
+    parser.add_argument('--save_dir', type=str, default='saved_checkpoints/checkpoint.pth', help='Save directory.')
     parser.add_argument('--arch', type=str, default='vgg16', help='Choose between VGG16 and ?.')
     parser.add_argument('--hidden_units', type=str, default='512,124', help='Layer sizes. Seperate with comma (,).')
     parser.add_argument('--epochs', type=int, default=1)
-    parser.add_argument('--learning_rate', type=float, default=0.05)
+    parser.add_argument('--learning_rate', type=float, default=0.005)
     parser.add_argument('--gpu',action='store_true')
     return parser.parse_args()
 
@@ -68,7 +68,6 @@ def create_model(model_name, class_to_idx, classifier=None, criterion=None, opti
     else:
         print("Error!")
 
-
     if not state_dict == None:                               #load state_dict, if available
          model.load_state_dict(state_dict)
     if criterion == None:
@@ -103,6 +102,8 @@ def create_classifier(input_size, hidden_size, output_size, dropout = 0.5):
 
 def train_model(model, train_dataloader, test_dataloader, optimizer, criterion, epochs = 3, print_sequence = 50, gpu = False):
     """TODO DocStr: Train model"""
+    print("Training begins..")
+
     steps = 0
 
     if gpu == True:
@@ -136,7 +137,7 @@ def train_model(model, train_dataloader, test_dataloader, optimizer, criterion, 
             if steps % print_sequence == 0:
                 validation = validate(model, test_dataloader, criterion, device)
                 duration = datetime.now() - time_start # calculate time since start of training
-                print("{} - Iterations: {} - Epoch: {} - Loss: {} - Accuracy: {}".format(duration, steps, e+1, running_loss /                       print_sequence, validation))
+                print("{} - Iterations: {} - Epoch: {}/{} - Loss: {} - Accuracy: {}".format(duration, steps, e+1, epochs, running_loss /                       print_sequence, validation))
                 running_loss = 0
     print("Done.")
 
@@ -172,8 +173,8 @@ def save_model(model_name, model, optimizer, criterion, path=""):
                   "class_to_idx": model.class_to_idx,
                   "optimizer": optimizer,
                   "criterion": criterion}
-    name = input("Enter checkpoint name (ex. checkpoint_vgg_20180906.pth): ")
-    torch.save(checkpoint, path + name)
+
+    torch.save(checkpoint, path)
     #print(checkpoint["state_dict"].keys())
     print("Saved.")
 
