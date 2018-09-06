@@ -25,7 +25,7 @@ def transform_data(data_dir):
     train_dir = data_dir + '/train'
     valid_dir = data_dir + '/valid'
     test_dir = data_dir + '/test'
-    print(train_dir)
+
     #  Define your transforms for the training, validation, and testing sets
     data_transforms = {"train": transforms.Compose([transforms.Resize(255), transforms.RandomVerticalFlip(),
                                                 transforms.RandomHorizontalFlip(),
@@ -165,7 +165,7 @@ def validate(model, val_dataloader, criterion, device):
         accuracy = accuracy / steps # calculate mean accuracy
     return accuracy.item()
 
-def save_model(model_name, model, optimizer, criterion, path=path):
+def save_model(model_name, model, optimizer, criterion, path=""):
     checkpoint = {"model_name": model_name,
                   "classifier": model.classifier,
                   "state_dict": model.state_dict(),
