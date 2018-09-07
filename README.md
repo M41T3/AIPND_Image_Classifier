@@ -11,7 +11,7 @@
 8. Predict class.
 
 ## train.py
-Create a model on pretrained CNN's (vgg16, alexnet or densenet161) for a dataset and save it.
+Create a model from a pretrained CNN's (vgg16, alexnet or densenet161) for a dataset and save it.
 
 ```
 usage: train.py [-h] [--save_dir SAVE_DIR] [--arch ARCH]
