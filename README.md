@@ -11,3 +11,31 @@
 8. Predict class.
 
 ## train.py
+Create a model on pretrained CNN's (vgg16, alexnet or densenet161) for a dataset and save it.
+
+```
+usage: train.py [-h] [--save_dir SAVE_DIR] [--arch ARCH]
+                [--hidden_units HIDDEN_UNITS] [--epochs EPOCHS]
+                [--learning_rate LEARNING_RATE] [--gpu]
+                data_dir
+
+positional arguments:
+  data_dir              Directory of a dataset. Must include /dir/train/,
+                        /dir/valid/ and /dir/test/.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --save_dir SAVE_DIR   Save directory.
+  --arch ARCH           Choose between "vgg16" and "alexnet" and "densenet".
+  --hidden_units HIDDEN_UNITS
+                        Hidden layer sizes. Seperate with comma (,).
+  --epochs EPOCHS       Number of epochs.
+  --learning_rate LEARNING_RATE
+  --gpu                 Append if CUDA is available.
+```
+
+Example:
+
+```
+python train.h flowers --gpu --save_dir flowers_checkpoints/check_alexnet_1024_512_e3 --epochs 3 --hidden_units 1024,512 --arch alexnet
+```
