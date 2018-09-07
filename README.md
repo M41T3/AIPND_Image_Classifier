@@ -37,5 +37,31 @@ optional arguments:
 Example:
 
 ```
-python train.h flowers --gpu --save_dir flowers_checkpoints/check_alexnet_1024_512_e3 --epochs 3 --hidden_units 1024,512 --arch alexnet
+python train.py flowers --gpu --save_dir flowers_checkpoints/check_alexnet_1024_512_e3.pth --epochs 3 --hidden_units 1024,512 --arch alexnet
+```
+
+## predict.py
+Load a checkpoint and build its model. Predict class of the image.
+
+```
+usage: predict.py [-h] [--category_names CATEGORY_NAMES] [--topk TOPK] [--gpu]
+                  input checkpoint
+
+positional arguments:
+  input                 Input image.
+  checkpoint            Saved checkpoint.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --category_names CATEGORY_NAMES
+                        Include the mapping of classes to the output of the
+                        network.
+  --topk TOPK           Number of returned probabilities.
+  --gpu                 Append if CUDA is available
+```
+
+Example:
+
+```
+python predict.py image_path checkpoint.pth --gpu --category_names category_to_name.json 
 ```
