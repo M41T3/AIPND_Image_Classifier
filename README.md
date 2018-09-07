@@ -1,5 +1,7 @@
 # AI Programming with Python Project (pytorch)
 
+![Rose Image](/assets/rose.PNG)
+
 ## Image Classifier Notebook
 1. Import data using 'torchvision.ImageFolder'.
 2. Create model using a pretrained CNN and replace its classifer by a new one, which fits the input data.
