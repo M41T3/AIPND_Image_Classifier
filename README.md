@@ -1,6 +1,6 @@
 # AI Programming with Python Project (pytorch)
 
-![Rose Image](/assets/rose.PNG)
+![Rose Image](/assets/rose.PNG) ![Probs Image](/assets/probs.PNG)
 
 ## Image Classifier Notebook
 1. Import data using 'torchvision.ImageFolder'.
